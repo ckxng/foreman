@@ -172,7 +172,7 @@ class Api:
         else:
             self.resp = requests.put(url=self.url, auth=self.auth,
                                      headers=self.headers, data=self.payload,
-                                        cert=self.ca_cert)
+                                     cert=self.ca_cert)
             if self.__process_resp__(obj):
                 return self.res
             return False
@@ -195,13 +195,13 @@ class Api:
             self.method = 'POST(Async)'
             session = FuturesSession()
             self.resp = session.post(url=self.url, auth=self.auth,
-                                    headers=self.headers, data=self.payload,
-                                    cert=self.ca_cert)
+                                     headers=self.headers, data=self.payload,
+                                     cert=self.ca_cert)
             return self.resp
         else:
             self.resp = requests.post(url=self.url, auth=self.auth,
-                                        headers=self.headers,
-                                        data=self.payload, cert=self.ca_cert)
+                                      headers=self.headers,
+                                      data=self.payload, cert=self.ca_cert)
             return self.__process_resp__(obj)
 
     @log
