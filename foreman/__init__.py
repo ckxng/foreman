@@ -36,16 +36,18 @@ class Foreman:
     """
     HostGroup class
     """
-    def __init__(self, password, login='admin', ip='127.0.0.1'):
+    def __init__(self, password, login='admin', ip='127.0.0.1', ca_cert=None):
         """ Function __init__
         Init the API with the connection params
         @param password: authentication password
         @param password: authentication login - default is admin
         @param ip: api ip - default is localhost
+        @param ca_cert: CA Certificate for SSL connection
+        @param ca_cert:  Defaults to system CA certs, set for self-signed
         @return RETURN: self
         """
         self.api = Api(login=login, password=password, ip=ip,
-                       printErrors=False)
+                       printErrors=False, ca_cert=ca_cert)
         self.domains = Domains(self.api)
         self.smartProxies = SmartProxies(self.api)
         self.puppetClasses = PuppetClasses(self.api)
