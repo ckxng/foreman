@@ -55,7 +55,7 @@ class Api:
         """
         def _log(self, *args, **kwargs):
             ret = function(self, *args, **kwargs)
-            if len(self.history)>self.maxHistory:
+            if len(self.history) > self.maxHistory:
                 self.history = self.history[1:self.maxHistory]
             self.history.append({'errorMsg': self.errorMsg,
                                  'payload': self.payload,
