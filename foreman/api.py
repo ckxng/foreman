@@ -147,7 +147,7 @@ class Api:
         return list[name] if name in list.keys() else False
 
     @log
-    def set(self, obj, id, payload, action='', async=False):
+    def set(self, obj, id, payload, action='', isasync=False):
         """ Function set
         Set an object by id
 
@@ -155,7 +155,7 @@ class Api:
         @param id: the id of the object (name or id)
         @param action: specific action of an object ('power'...)
         @param payload: the dict of the payload
-        @param async: should this request be async, if true use
+        @param isasync: should this request be async, if true use
                         return.result() to get the response
         @return RETURN: the server response
         """
@@ -164,7 +164,7 @@ class Api:
         if action:
             self.url += '/{}'.format(action)
         self.payload = json.dumps(payload)
-        if async:
+        if isasync:
             session = FuturesSession()
             return session.put(url=self.url, auth=self.auth,
                                headers=self.headers, data=self.payload,
@@ -178,20 +178,20 @@ class Api:
             return False
 
     @log
-    def create(self, obj, payload, async=False):
+    def create(self, obj, payload, isasync=False):
         """ Function create
         Create an new object
 
         @param obj: object name ('hosts', 'puppetclasses'...)
         @param payload: the dict of the payload
-        @param async: should this request be async, if true use
+        @param isasync: should this request be async, if true use
                         return.result() to get the response
         @return RETURN: the server response
         """
         self.url = self.base_url + obj
         self.method = 'POST'
         self.payload = json.dumps(payload)
-        if async:
+        if isasync:
             self.method = 'POST(Async)'
             session = FuturesSession()
             self.resp = session.post(url=self.url, auth=self.auth,

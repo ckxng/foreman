@@ -61,12 +61,12 @@ class Hosts(ForemanObjects):
         """
         if key not in self:
             self.printer = printer
-            self.async = False
+            self.isasync = False
             # Create the VM in foreman
             self.__printProgression__('In progress',
                                       key + ' creation: push in Foreman',
                                       eol='\r')
-            self.api.create('hosts', attributes, async=self.async)
+            self.api.create('hosts', attributes, isasync=self.isasync)
             self[key]['interfaces'].append(ipmi)
             # Wait for puppet catalog to be applied
             # self.waitPuppetCatalogToBeApplied(key)
@@ -123,12 +123,12 @@ class Hosts(ForemanObjects):
         """
 
         self.printer = printer
-        self.async = False
+        self.isasync = False
         # Create the VM in foreman
         # NOTA: with 1.8 it will return 422 'Failed to login via SSH'
         self.__printProgression__('In progress',
                                   key + ' creation: push in Foreman', eol='\r')
-        asyncCreation = self.api.create('hosts', attributes, async=self.async)
+        asyncCreation = self.api.create('hosts', attributes, isasync=self.isasync)
 
         #  Wait before asking to power on the VM
         # sleep = 5

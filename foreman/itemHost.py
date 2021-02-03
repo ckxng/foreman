@@ -99,7 +99,7 @@ class ItemHost(ForemanItem):
         """
         return self.api.set('hosts', self.key,
                             {"host": {}},
-                            'puppetrun', async=False)
+                            'puppetrun', isasync=False)
 
     def powerOn(self):
         """ Function powerOn
@@ -109,7 +109,7 @@ class ItemHost(ForemanItem):
         """
         return self.api.set('hosts', self.key,
                             {"power_action": "start"},
-                            'power', async=False)
+                            'power', isasync=False)
 
     def getParamFromEnv(self, var, default=''):
         """ Function getParamFromEnv

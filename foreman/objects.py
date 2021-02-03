@@ -50,7 +50,7 @@ class ForemanObjects(dict):
         if payloadObj:
             self.payloadObj = payloadObj
         # For asynchronous creations
-        self.async = False
+        self.isasync = False
         # Default params
         if index:
             self.index = index
@@ -119,7 +119,7 @@ class ForemanObjects(dict):
         if key not in self:
             payload = {self.payloadObj: {self.index: key}}
             payload[self.payloadObj].update(attributes)
-            return self.api.create(self.objName, payload, async=self.async)
+            return self.api.create(self.objName, payload, isasync=self.isasync)
         return False
 
     @updateAfterDecorator
